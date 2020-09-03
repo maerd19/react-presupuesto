@@ -54,6 +54,10 @@ const Pregunta = ({ setPresupuesto, setRestante, setPregunta }) => {
   );
 };
 
-Pregunta.propTypes = {};
+Pregunta.propTypes = {
+  setPresupuesto: PropTypes.func.isRequired,
+  setRestante: PropTypes.func.isRequired,
+  setPregunta: PropTypes.func.isRequired,
+};
 
 export default Pregunta;
