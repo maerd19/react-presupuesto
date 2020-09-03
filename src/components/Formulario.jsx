@@ -6,9 +6,22 @@ import Error from "./Error";
 
 const Formulario = ({ setGasto, setCrearGasto }) => {
   // definir State
-  const [nombre, setNombre] = useState("");
-  const [cantidad, setCantidad] = useState(0);
+  const [form, setForm] = useState({
+    nombre: "",
+    cantidad: 0,
+  });
   const [error, setError] = useState(false);
+
+  // Actualizar State
+  const actualizarState = (e) => {
+    // Eliminar mensaje de error
+    setError(false);
+
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  // Destructuring del form en el State
+  const { nombre, cantidad } = form;
 
   // Cuando el usuario agrega un gasto
   const agregarGasto = (e) => {
@@ -23,7 +36,7 @@ const Formulario = ({ setGasto, setCrearGasto }) => {
     // Construir el gasto
     const gasto = {
       nombre,
-      cantidad,
+      cantidad: parseInt(cantidad, 10),
       id: shortid.generate(),
     };
 
@@ -32,8 +45,7 @@ const Formulario = ({ setGasto, setCrearGasto }) => {
     setCrearGasto(true);
 
     // Resetear Form
-    setNombre("");
-    setCantidad(0);
+    setForm({ nombre: "", cantidad: 0 });
   };
 
   return (
@@ -48,10 +60,11 @@ const Formulario = ({ setGasto, setCrearGasto }) => {
         <label>Nombre Gasto</label>
         <input
           type="text"
+          name="nombre"
           className="u-full-width"
           placeholder="Ej. Transporte"
           value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
+          onChange={actualizarState}
         />
       </div>
 
@@ -59,10 +72,11 @@ const Formulario = ({ setGasto, setCrearGasto }) => {
         <label>Cantidad Gasto</label>
         <input
           type="number"
+          name="cantidad"
           className="u-full-width"
           placeholder="Ej. 300"
           value={cantidad}
-          onChange={(e) => setCantidad(parseInt(e.target.value, 10))}
+          onChange={actualizarState}
         />
       </div>
 
