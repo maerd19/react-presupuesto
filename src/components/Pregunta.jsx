@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+import Error from "./Error";
+
 const Pregunta = (props) => {
   // definir el state
   const [cantidad, setCantidad] = useState(0);
@@ -28,6 +30,8 @@ const Pregunta = (props) => {
   return (
     <>
       <h2>Coloca tu presupuesto</h2>
+
+      {error ? <Error mensaje="El presupuesto es incorrecto" /> : null}
 
       <form onSubmit={agregarPresupuesto}>
         <input
