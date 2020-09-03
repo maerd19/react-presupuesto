@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Error from "./Error";
 
-const Pregunta = (props) => {
+const Pregunta = ({ setPresupuesto, setRestante }) => {
   // definir el state
   const [cantidad, setCantidad] = useState(0);
   const [error, setError] = useState(false);
@@ -25,6 +25,8 @@ const Pregunta = (props) => {
 
     // Si se pasa la validacion
     setError(false);
+    setPresupuesto(cantidad);
+    setRestante(cantidad);
   };
 
   return (
