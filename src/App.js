@@ -6,26 +6,41 @@ import ControlPresupuesto from "./components/ControlPresupuesto";
 
 function App() {
   // definir State
+  // Valores para el formulario inicial
   const [presupuesto, setPresupuesto] = useState(0);
   const [restante, setRestante] = useState(0);
   const [pregunta, setPregunta] = useState(true);
+  // Almacenamiento de los gastos
   const [gastos, setGastos] = useState([]);
   const [crearGasto, setCrearGasto] = useState(false);
-  // Se agrega un nuevo gasto
+  // Controlar un nuevo gasto
   const [gasto, setGasto] = useState({});
 
   // UseEffect que atualiza el restante
   useEffect(() => {
-    // Agrega el nuevo presupuesto
-    if (crearGasto) setGastos([...gastos, gasto]);
+    if (crearGasto) {
+      // Agrega gasto al nuevo presupuesto
+      setGastos([...gastos, gasto]);
 
-    // Resta del presupuesto actual
-    const presupuestoRestante = restante - gasto.cantidad;
-    setRestante(presupuestoRestante);
+      // Resta del presupuesto actual
+      const presupuestoRestante = restante - gasto.cantidad;
+      setRestante(presupuestoRestante);
 
-    // Resetear a false
-    setCrearGasto(false);
+      // Resetear a false
+      setCrearGasto(false);
+    }
   }, [gasto, crearGasto, gastos, restante]);
+
+  // Eliminar gasto del presupuesto
+  const eliminarGasto = (id) => {
+    // Agregar al presupuesto actual
+    const gastoEliminado = gastos.filter((gasto) => gasto.id === id);
+    setRestante(restante + gastoEliminado[0].cantidad);
+
+    // Remover gasto del listado
+    const nuevaListaGastos = gastos.filter((gasto) => gasto.id !== id);
+    setGastos(nuevaListaGastos);
+  };
 
   return (
     <div className="container">
@@ -45,7 +60,7 @@ function App() {
                 <Formulario setGasto={setGasto} setCrearGasto={setCrearGasto} />
               </div>
               <div className="one-half column">
-                <Listado gastos={gastos} />
+                <Listado gastos={gastos} eliminarGasto={eliminarGasto} />
                 <ControlPresupuesto
                   presupuesto={presupuesto}
                   restante={restante}

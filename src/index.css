@@ -101,3 +101,10 @@ h2 {
   padding: 1rem;
   color: white;
 }
+
+.gastos-realizados li p .eliminar {
+  background-color: #c10059;
+  padding: 1rem;
+  color: white;
+  cursor: pointer;
+}
