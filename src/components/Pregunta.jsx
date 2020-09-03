@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Error from "./Error";
 
 const Pregunta = ({ setPresupuesto, setRestante, setPregunta }) => {
-  // definir el state
+  // definir State
   const [cantidad, setCantidad] = useState(0);
   const [error, setError] = useState(false);
 

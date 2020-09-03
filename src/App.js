@@ -3,7 +3,7 @@ import Pregunta from "./components/Pregunta";
 import Formulario from "./components/Formulario";
 
 function App() {
-  // definit el state
+  // definir State
   const [presupuesto, setPresupuesto] = useState(0);
   const [restante, setRestante] = useState(0);
   const [pregunta, setPregunta] = useState(true);
