@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 const Pregunta = (props) => {
   // definir el state
   const [cantidad, setCantidad] = useState(0);
+  const [error, setError] = useState(false);
 
   // Funcion que lee el presupuesto
   const definirPresupuesto = (e) => {
@@ -15,8 +16,13 @@ const Pregunta = (props) => {
     e.preventDefault();
 
     // Validar
+    if (cantidad < 1 || isNaN(cantidad)) {
+      setError(true);
+      return;
+    }
 
     // Si se pasa la validacion
+    setError(false);
   };
 
   return (
