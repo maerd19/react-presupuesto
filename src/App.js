@@ -9,14 +9,15 @@ function App() {
   // Valores para el formulario inicial
   const [presupuesto, setPresupuesto] = useState(0);
   const [restante, setRestante] = useState(0);
+  const [gastoTotal, setgastoTotal] = useState(0);
   const [pregunta, setPregunta] = useState(true);
   // Almacenamiento de los gastos
   const [gastos, setGastos] = useState([]);
   const [crearGasto, setCrearGasto] = useState(false);
-  // Controlar un nuevo gasto
+  // Agregar un nuevo gasto
   const [gasto, setGasto] = useState({});
 
-  // UseEffect que atualiza el restante
+  // UseEffect que actualiza el restante
   useEffect(() => {
     if (crearGasto) {
       // Agrega gasto al nuevo presupuesto
@@ -26,16 +27,24 @@ function App() {
       const presupuestoRestante = restante - gasto.cantidad;
       setRestante(presupuestoRestante);
 
+      // Actualizar gasto total
+      let total = gastoTotal;
+      setgastoTotal(total + gasto.cantidad);
+
       // Resetear a false
       setCrearGasto(false);
     }
-  }, [gasto, crearGasto, gastos, restante]);
+  }, [gasto, crearGasto, gastos, restante, gastoTotal]);
 
   // Eliminar gasto del presupuesto
   const eliminarGasto = (id) => {
     // Agregar al presupuesto actual
     const gastoEliminado = gastos.filter((gasto) => gasto.id === id);
     setRestante(restante + gastoEliminado[0].cantidad);
+
+    // Actualizar gasto total
+    let total = gastoTotal;
+    setgastoTotal(total - gastoEliminado[0].cantidad);
 
     // Remover gasto del listado
     const nuevaListaGastos = gastos.filter((gasto) => gasto.id !== id);
@@ -64,6 +73,7 @@ function App() {
                 <ControlPresupuesto
                   presupuesto={presupuesto}
                   restante={restante}
+                  gastoTotal={gastoTotal}
                 />
               </div>
             </div>
