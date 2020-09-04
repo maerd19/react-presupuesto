@@ -6,7 +6,9 @@ const ControlPresupuesto = ({ presupuesto, restante, gastoTotal }) => {
   return (
     <>
       <div className="alert alert-primary">Presupuesto: $ {presupuesto}</div>
-      <div className="alert alert-danger">Gasto Total: $ {gastoTotal}</div>
+      {gastoTotal ? (
+        <div className="alert alert-danger">Gasto Total: $ {gastoTotal}</div>
+      ) : null}
       <div className={revisarPresupuesto(presupuesto, restante)}>
         Restante: $ {restante}
       </div>

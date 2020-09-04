@@ -10,6 +10,7 @@ const Pregunta = ({ setPresupuesto, setRestante, setPregunta }) => {
 
   // Funcion que lee el presupuesto
   const definirPresupuesto = (e) => {
+    setError(false);
     setCantidad(parseInt(e.target.value, 10));
   };
 
